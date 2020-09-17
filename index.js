@@ -10,11 +10,13 @@
 const startURL = 'https://api.covid19api.com/summary';
 const form = document.getElementsByClassName('data-form');
 const submitBtn = document.querySelector('.submit');
-const dataView = document.getElementById('displaymedia');
-const nav = document.querySelector('nav');
+const displaytable = document.getElementById('displaytable');
 
-dataView.style.display = 'none';
-nav.style.display = 'none';
+
+displaytable.style.display = 'none';
+
+//const nav = document.querySelector('nav');
+//nav.style.display = 'none';
 
 submitBtn.addEventListener('click', fetchResults);
 
@@ -35,8 +37,8 @@ function fetchResults(e) {
 
 function displayData(data) {
     
-    dataView.style.display = 'inline';
-    nav.style.display = 'inline';
+    displaytable.style.display = 'inline';
+    //nav.style.display = 'inline';
 
     console.log(data);
     console.log(data.Countries);
