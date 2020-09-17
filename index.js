@@ -11,7 +11,10 @@ const startURL = 'https://api.covid19api.com/summary';
 const form = document.getElementsByClassName('data-form');
 const submitBtn = document.querySelector('.submit');
 const dataView = document.getElementById('displaymedia');
+const nav = document.querySelector('nav');
 
+dataView.style.display = 'none';
+nav.style.display = 'none';
 
 submitBtn.addEventListener('click', fetchResults);
 
@@ -29,17 +32,32 @@ function fetchResults(e) {
 
 }
 
+
 function displayData(data) {
     
-    
-    //dataView.style.display = 'block';
-    //console.log(data);
-    //console.log(data.Countries);
+    dataView.style.display = 'inline';
+    nav.style.display = 'inline';
 
-    let theseCountries = data.Countries;
-    //console.log(theseCountries);
+    console.log(data);
+    console.log(data.Countries);
 
-    for (currentcountry of theseCountries) {
+    let countryObject = data.Countries;
+
+    for (const thesecountries in countryObject) {  
+        //build the menu
+        /* if(countryObject.indexOf(countryObject[thesecountries]) % 30 === 0) {
+            console.log(countryObject[thesecountries].Country);
+            
+            let navItem = document.createElement('li')
+            let navCountry = document.createElement('a');
+            let navItem = document.
+            navCountry.textContent = countryObject[thesecountries].Country;
+            nav.appendChild(navCountry);
+
+        } */
+
+        //console.log(countryObject[thesecountries]);
+
         let tableBody = document.getElementById('covidData');
         let row = document.createElement('tr');
         let country = document.createElement('th');
@@ -48,13 +66,13 @@ function displayData(data) {
         let totalRecovery = document.createElement('td');
         let totalDeaths = document.createElement('td');
 
-        country.textContent = currentcountry.Country;
-        newCases.textContent = currentcountry.NewConfirmed;
-        totalCases.textContent = currentcountry.TotalConfirmed;
-        totalRecovery.textContent = currentcountry.TotalRecovered;
-        totalDeaths.textContent = currentcountry.TotalDeaths;
-
-        //console.log(country, newCases, totalCases, totalRecovery, totalDeaths);
+        country.textContent = countryObject[thesecountries].Country;
+        newCases.textContent = countryObject[thesecountries].NewConfirmed;
+        totalCases.textContent = countryObject[thesecountries].TotalConfirmed;
+        totalRecovery.textContent = countryObject[thesecountries].TotalRecovered;
+        totalDeaths.textContent = countryObject[thesecountries].TotalDeaths;
+        
+        console.log(country, newCases, totalCases, totalRecovery, totalDeaths);
 
         row.appendChild(country);
         row.appendChild(newCases);
@@ -65,18 +83,17 @@ function displayData(data) {
         //console.log(row);
 
         tableBody.appendChild(row);
+        
+        //create breaks
+        /* if(countryObject.indexOf(countryObject[thesecountries]) % 30 === 0) {
+            console.log(countryObject[thesecountries].Country);
+            
+            let menu = document.querySelector('.menu');
+            let menuCountry = document.createElement('p');
+            menuCountry.textContent = countryObject[thesecountries].Country;
+            menu.appendChild(menuCountry);
 
-
-        //iterate through the array
-        // grab every 30th index
-        //display index on 
-        
-        let menu = document.getElementsByClassName('menu');
-        
-        //Every 30th country
-        
-        
-
+        } */
 
     }
 
