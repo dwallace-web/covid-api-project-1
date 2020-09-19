@@ -11,15 +11,16 @@ const startURL = 'https://api.covid19api.com/summary';
 const form = document.getElementsByClassName('data-form');
 const submitBtn = document.querySelector('.submit');
 const displaytable = document.getElementById('displaytable');
-
+const tableBody = document.getElementById('covidData');
+const dropdown = document.querySelector('.dropdown');
+const placeholder = document.getElementById('placeholder');
 
 displaytable.style.display = 'none';
-
-//const nav = document.querySelector('nav');
-//nav.style.display = 'none';
+dropdown.style.display = 'none';
 
 submitBtn.addEventListener('click', fetchResults);
-
+const dropdownMenu = document.querySelector('.dropdown-menu');
+let totalCaseArray = [];
 
 function fetchResults(e) {
     console.log(e);
@@ -36,31 +37,26 @@ function fetchResults(e) {
 
 
 function displayData(data) {
+    let totalCaseArray = [];
+    while (tableBody.firstChild) {
+        tableBody.removeChild(tableBody.firstChild);
+    };
+    while (dropdownMenu.firstChild) {
+        dropdownMenu.removeChild(dropdownMenu.firstChild);
+    };
+    // while (placeholder.firstChild){
+    //     placeholder.removeChild(placeholder.firstChild);    
+    // };
     
+
     displaytable.style.display = 'inline';
-    //nav.style.display = 'inline';
+    dropdown.style.display = 'inline';
 
     console.log(data);
+    let countryObject = data.Countries;
     console.log(data.Countries);
 
-    let countryObject = data.Countries;
-
-    for (const thesecountries in countryObject) {  
-        //build the menu
-        /* if(countryObject.indexOf(countryObject[thesecountries]) % 30 === 0) {
-            console.log(countryObject[thesecountries].Country);
-            
-            let navItem = document.createElement('li')
-            let navCountry = document.createElement('a');
-            let navItem = document.
-            navCountry.textContent = countryObject[thesecountries].Country;
-            nav.appendChild(navCountry);
-
-        } */
-
-        //console.log(countryObject[thesecountries]);
-
-        let tableBody = document.getElementById('covidData');
+    for (const thesecountries in countryObject) {
         let row = document.createElement('tr');
         let country = document.createElement('th');
         let newCases = document.createElement('td');
@@ -69,12 +65,13 @@ function displayData(data) {
         let totalDeaths = document.createElement('td');
 
         country.textContent = countryObject[thesecountries].Country;
+        country.id = countryObject[thesecountries].Country;
         newCases.textContent = countryObject[thesecountries].NewConfirmed;
         totalCases.textContent = countryObject[thesecountries].TotalConfirmed;
         totalRecovery.textContent = countryObject[thesecountries].TotalRecovered;
         totalDeaths.textContent = countryObject[thesecountries].TotalDeaths;
-        
-        console.log(country, newCases, totalCases, totalRecovery, totalDeaths);
+
+        //console.log(country, newCases, totalCases, totalRecovery, totalDeaths);
 
         row.appendChild(country);
         row.appendChild(newCases);
@@ -83,22 +80,31 @@ function displayData(data) {
         row.appendChild(totalDeaths);
 
         //console.log(row);
-
         tableBody.appendChild(row);
-        
-        //create breaks
-        /* if(countryObject.indexOf(countryObject[thesecountries]) % 30 === 0) {
-            console.log(countryObject[thesecountries].Country);
+        //create dropdown
+        if(countryObject.indexOf(countryObject[thesecountries]) % 18 === 0) {
             
-            let menu = document.querySelector('.menu');
-            let menuCountry = document.createElement('p');
-            menuCountry.textContent = countryObject[thesecountries].Country;
-            menu.appendChild(menuCountry);
+            let item = document.createElement('a');
+            item.textContent = countryObject[thesecountries].Country;
+            item.className = 'dropdown-item';
+            item.setAttribute('href', "#" + countryObject[thesecountries].Country);
+            console.log(item);
+            dropdownMenu.appendChild(item);
+        }
 
-        } */
-
+        totalCaseArray.push(countryObject[thesecountries].TotalConfirmed);        
     }
 
+    console.log(totalCaseArray);
+    const totalCaseCountSum = totalCaseArray.reduce((a,b) => a + b, 0)
+    console.log(totalCaseCountSum);
     
+    let blurb = document.createElement('p');
+    totalCountries = data.Countries.length;
+    blurb.textContent = `There are ${totalCountries} countries in the API. There are ${totalCaseCountSum} total cases in the API.`;
+    blurb.className = 'copyBlurb';
+    console.log(blurb);
     
+    placeholder.appendChild(blurb);
+
 };

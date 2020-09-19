@@ -11,13 +11,6 @@
 </head>
 
 <body>
-    <!-- <nav>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Country</a>
-            </li>
-        </ul>
-    </nav> -->
     <div class="container">
         <div class="row text-center">
             <div class="col-12">
@@ -26,43 +19,49 @@
         </div>
         <div class="row">
             <div class="col-6 text-left">
-                <p>This javascript demostrates use of the fetch API to get data from a COVID API. This fetches data from the summary branch, which is inclusive of all country data.</p>
+                <p>This demostrates use of the fetch API to get data from a COVID API. This fetches data from
+                    the summary branch, which is inclusive of all country data. The data is fetched form the API and displayed using a bootstrap table.</p>
             </div>
-            <div class="col-6 text-right">
-                <p>
-
-                </p>
+            <div class="col-6 text-center" id="dropdownlead">
+                <div id="placeholder"></div>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle btn-success" href="#" role="button"
+                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Skip To Country
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 text-center">
-            <table class="table tabled-bordered table-striped mx-auto" id="displaytable">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Country</th>
-                        <th scope="col">New Cases</th>
-                        <th scope="col">Total Cases</th>
-                        <th scope="col">Recovered</th>
-                        <th scope="col">Deaths</th>
-                    </tr>
-                </thead>
-                <tbody id="covidData">
+        <div class="row">
+            <div class="col-12 text-center">
+                <table class="table tabled-bordered table-striped mx-auto" id="displaytable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Country</th>
+                            <th scope="col">New Cases</th>
+                            <th scope="col">Total Cases</th>
+                            <th scope="col">Recovered</th>
+                            <th scope="col">Deaths</th>
+                        </tr>
+                    </thead>
+                    <tbody id="covidData">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 text-center">
-            <form class="data-form">
-                <p>
-                    <!-- <button class="submit">Submit search</button> -->
-                    <button type="submit" class="submit">Submit</button>
-                </p>
-            </form>
+        <div class="row">
+            <div class="col-12 text-center">
+                <form class="data-form">
+                    <p>
+                        <!-- <button class="submit">Submit search</button> -->
+                        <button type="submit" class="submit">Submit</button>
+                    </p>
+                </form>
+            </div>
         </div>
-    </div>
     </div>
     <!-- JS Tags -->
     <script src="index.js"></script>
