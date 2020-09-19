@@ -44,9 +44,9 @@ function displayData(data) {
     while (dropdownMenu.firstChild) {
         dropdownMenu.removeChild(dropdownMenu.firstChild);
     };
-    // while (placeholder.firstChild){
-    //     placeholder.removeChild(placeholder.firstChild);    
-    // };
+    while (placeholder.firstChild){
+        placeholder.removeChild(placeholder.firstChild);    
+    };
     
 
     displaytable.style.display = 'inline';
@@ -96,7 +96,7 @@ function displayData(data) {
     }
 
     console.log(totalCaseArray);
-    const totalCaseCountSum = totalCaseArray.reduce((a,b) => a + b, 0)
+    let totalCaseCountSum = totalCaseArray.reduce((a,b) => a + b, 0)
     console.log(totalCaseCountSum);
     
     let blurb = document.createElement('p');
@@ -104,7 +104,7 @@ function displayData(data) {
     blurb.textContent = `There are ${totalCountries} countries in the API. There are ${totalCaseCountSum} total cases in the API.`;
     blurb.className = 'copyBlurb';
     console.log(blurb);
-    
+
     placeholder.appendChild(blurb);
 
 };
